@@ -28,12 +28,50 @@ function numButPress(num) {
         }
         
     }
-document.getElementById('entry').value = newValss
+document.getElementById('entry').value = newVal
 }
 function mathButPress(operator) {
-
+ // Check if there was a previous calculation 
+ // by seeing if resultVal has a value
+ // If result doesn't have a value then store
+ // the current value as a previous for the next calculation 
+    if(!resultVal){
+    preVal = newVal
+} else {
+preVal = resultVal
+    }
+    newVal = ''
+    decimalClicked = false
+    mathOperator = operator
+    resultVal = ''
+    document.getElementById('entry').value=''
 }
+
 function equalButPress() {
+ decimalClicked = false
+
+ preVal = parseFloat(preVal)
+ newVal = parseFloat(newVal)
+
+ //preform calculations
+ switch(mathOperator){
+    case '+':
+        resultVal = preVal + newVal
+        break
+    case '-':
+        resultVal = preVal - newVal 
+        break
+    case '*':
+        resultVal = preVal * newVal
+        break
+    case '/':
+            resultVal = preVal / newVal
+        break
+     default:
+    preVal = newVal
+ }
+ preVal = newVal
+ document.getElementById('entry').value = resultVal
 
 }
 // clears everything except memory
